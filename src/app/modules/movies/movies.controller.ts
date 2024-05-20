@@ -74,9 +74,27 @@ const updateMovie = async (req: Request, res: Response) => {
   }
 };
 
+const deleteMovie = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const result = await MovieServices.deleteMoviesFromDb(id);
+
+    res.status(200).json({
+      success: true,
+      message: "Movies delete successfully!",
+    });
+  } catch (error: any) {
+    res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 export const MovieControllers = {
   createMovie,
   getAllMovies,
   getSpecificMovies,
   updateMovie,
+  deleteMovie,
 };

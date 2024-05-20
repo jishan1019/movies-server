@@ -26,9 +26,18 @@ const updateMovieFromDb = async (id: string, data: TMovie) => {
   return result;
 };
 
+const deleteMoviesFromDb = async (id: string) => {
+  const result = await Movie.findOneAndUpdate(
+    { _id: id },
+    { $set: { isDeleted: true } }
+  );
+  return result;
+};
+
 export const MovieServices = {
   createMoveIntoDb,
   getAllMoviesFromDb,
   getSpecificMoviesFromDb,
   updateMovieFromDb,
+  deleteMoviesFromDb,
 };

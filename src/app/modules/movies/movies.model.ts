@@ -17,4 +17,14 @@ const moviesSchema = new Schema<TMovie>({
   reviews: { type: [reviewSchema] },
 });
 
+moviesSchema.pre("find", function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+moviesSchema.pre("findOne", function (next) {
+  this.findOne({ isDeleted: { $ne: true } });
+  next();
+});
+
 export const Movie = model<TMovie>("Movie", moviesSchema);
