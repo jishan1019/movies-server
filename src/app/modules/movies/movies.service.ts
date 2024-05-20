@@ -6,9 +6,18 @@ const getAllMoviesFromDb = async () => {
   return result;
 };
 
+const getSpecificMoviesFromDb = async (id: string) => {
+  const result = await Movie.find({ _id: id });
+  return result;
+};
+
 const createMoveIntoDb = async (movieData: TMovie) => {
   const result = Movie.create(movieData);
   return result;
 };
 
-export const MovieServices = { createMoveIntoDb, getAllMoviesFromDb };
+export const MovieServices = {
+  createMoveIntoDb,
+  getAllMoviesFromDb,
+  getSpecificMoviesFromDb,
+};
