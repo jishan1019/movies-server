@@ -16,8 +16,19 @@ const createMoveIntoDb = async (movieData: TMovie) => {
   return result;
 };
 
+const updateMovieFromDb = async (id: string, data: TMovie) => {
+  const result = await Movie.updateOne({ _id: id }, { $set: data });
+  //   const result = await Movie.findOneAndUpdate({ _id: id }, data, { new: true });
+  //   const result = await Movie.findByIdAndUpdate({ _id: id }, data, {
+  //     new: true,
+  //   });
+
+  return result;
+};
+
 export const MovieServices = {
   createMoveIntoDb,
   getAllMoviesFromDb,
   getSpecificMoviesFromDb,
+  updateMovieFromDb,
 };

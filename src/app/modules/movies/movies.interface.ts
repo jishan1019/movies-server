@@ -11,5 +11,5 @@ export type TMovie = {
   genre: string;
   isDeleted: boolean;
   viewCount: number;
-  reviews: [TReview];
+  reviews?: [TReview];
 };
