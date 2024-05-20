@@ -6,6 +6,11 @@ const getAllMoviesFromDb = async () => {
   return result;
 };
 
+const getTrendingMoviesFromDb = async () => {
+  const result = await Movie.find({ viewCount: { $gt: 5 } });
+  return result;
+};
+
 const getSpecificMoviesFromDb = async (id: string) => {
   const result = await Movie.find({ _id: id });
   return result;
@@ -40,4 +45,5 @@ export const MovieServices = {
   getSpecificMoviesFromDb,
   updateMovieFromDb,
   deleteMoviesFromDb,
+  getTrendingMoviesFromDb,
 };

@@ -36,6 +36,23 @@ const getSpecificMovies = async (req: Request, res: Response) => {
   }
 };
 
+const getTrendingMovies = async (req: Request, res: Response) => {
+  try {
+    const result = await MovieServices.getTrendingMoviesFromDb();
+
+    res.status(200).json({
+      success: true,
+      message: "Movies fetched successfully!",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 const createMovie = async (req: Request, res: Response) => {
   try {
     const movieData = req.body;
@@ -94,6 +111,7 @@ const deleteMovie = async (req: Request, res: Response) => {
 export const MovieControllers = {
   createMovie,
   getAllMovies,
+  getTrendingMovies,
   getSpecificMovies,
   updateMovie,
   deleteMovie,
