@@ -1,18 +1,20 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 import { TMovie, TReview } from "./movies.interface";
 
-const reviewModel = new Schema<TReview>({
+const reviewSchema = new Schema<TReview>({
   email: { type: String, required: true },
   rating: { type: Number, required: true },
   comment: { type: String, required: true },
 });
 
-const moviesModel = new Schema<TMovie>({
+const moviesSchema = new Schema<TMovie>({
   title: { type: String, required: true },
   description: { type: String, required: true },
   releaseDate: { type: Date },
   genre: { type: String, required: true },
   isDeleted: { type: Boolean },
-  viewCount: { type: Number, required: true },
-  reviews: { type: [reviewModel] },
+  viewCount: { type: Number },
+  reviews: { type: [reviewSchema] },
 });
+
+export const Movie = model<TMovie>("Movie", moviesSchema);
